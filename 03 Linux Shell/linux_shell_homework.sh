@@ -15,3 +15,4 @@ $ cal: return calendar for current month
 $ cal -(number):  returns calendar for month backward with the number
 $ uptime: returns how long our system is runing
 $ hystory: returns hystory of used commands
+$ set: returns information about evironment
