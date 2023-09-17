@@ -12,7 +12,7 @@ $ logout: logout the user
 $ date: return date
 $ date +%Y-%m-%d: return date in format year: month: day
 $ cal: return calendar for current month
-$ cal -(number):  returns calendar for month backward with the number
+$ cal -[number]:  returns calendar for month backward with the number
 $ uptime: returns how long our system is runing
 $ hystory: returns hystory of used commands
 $ set: returns information about evironment
