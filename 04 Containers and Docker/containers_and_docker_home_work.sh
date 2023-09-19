@@ -21,4 +21,9 @@ $ npm install
 $ docker pull npm:16
 # start server locally with next command line
 $ npm run dev
-
+# run app in container.
+$ docker run -it -p 8080:8080 -v ${PWD}:/app -w /app node:16 npm run serve
+# now we need to pull a mongDB
+$ docker pull mongo
+#run container and se mongoDB
+$ docker run -p 27017:27017 -v ${PWD}/data:/etc/mongo -d -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=mongoadminpass mongo:latest
