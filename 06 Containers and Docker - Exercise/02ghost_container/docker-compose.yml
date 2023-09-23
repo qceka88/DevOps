@@ -1,0 +1,10 @@
+version: "1.0"
+services:
+  ghost-container_service:
+    container_name: ghost-container2
+    image: ghost:latest
+    environment:
+      - NODE_ENV=development
+    restart: always
+    ports:
+      - 3001:2368
