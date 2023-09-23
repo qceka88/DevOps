@@ -1,0 +1,10 @@
+version: "3.3"
+
+
+
+services:
+  ls-server-service:
+    container_name: ls-server
+    image: lightstreamer:latest
+    ports:
+      - 80:8080
