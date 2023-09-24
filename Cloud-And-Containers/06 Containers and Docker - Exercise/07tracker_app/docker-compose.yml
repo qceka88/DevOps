@@ -1,0 +1,10 @@
+version: "3.0"
+
+services:
+  tracker_app_service:
+    image: qceka88/tracker_app
+    build:
+      dockerfile: tracker_app/Dockerfile
+    ports:
+      - 8080:80
+    container_name: tracker_app
