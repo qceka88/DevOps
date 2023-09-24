@@ -1,0 +1,15 @@
+version: '1.0'
+
+services:
+  sqlserver-contaner:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=qwerTY@12345
+    volumes:
+      - sqldata:/var/opt/mssql
+    ports:
+      - 1433:1433
+    restart: always
+volumes:
+  sqldata:
