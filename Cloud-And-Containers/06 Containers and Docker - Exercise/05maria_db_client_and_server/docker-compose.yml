@@ -1,0 +1,24 @@
+version: '1.0'
+
+services:
+
+  mariadb_server:
+    container_name: mariadb_server
+    image: mariadb:latest
+    networks:
+      - mariadb_server
+    environment:
+      - MARIADB_USER=maria_user
+      - MARIADB_PASSWORD=db_password
+      - MARIADB_ROOT_PASSWORD=secret_password
+
+  mariadb_client:
+    container_name: mariadb_client
+    image: mariadb:latest
+    networks:
+      - mariadb_server
+    environment:
+      - MARIADB_ROOT_PASSWORD=secret_password
+
+networks:
+  mariadb_server:
