@@ -12,7 +12,7 @@ services:
     networks:
       - react-express
     container_name: frontend
-    working_dir: ${PWD}
+
 
   back-end:
     image: backend
@@ -23,7 +23,7 @@ services:
       - react-express
       - express-mongo
     container_name: backend
-    working_dir: ${PWD}
+
 
   mongo-db:
     image: mongo:latest
