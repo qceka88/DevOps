@@ -1,0 +1,34 @@
+version: "3.0"
+
+services:
+
+  web-app:
+    image: qceka88/taskboard_app
+    build:
+      dockerfile: TaskBoard.WebApp/Dockerfile
+    container_name: web_app
+    ports:
+      - 5000:80
+    networks:
+      - taskboard_network
+    restart: always
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    container_name: sqlserver
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=qwerty@12345
+    volumes:
+      - sqldata:/var/opt/mssql
+    networks:
+      - taskboard_network
+    restart: always
+
+volumes:
+  sqldata:
+
+networks:
+  taskboard_network:
