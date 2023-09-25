@@ -1,0 +1,40 @@
+version: "3.0"
+
+services:
+
+  front-end:
+    image: frontend
+    build:
+      dockerfile: frontend/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - react-express
+    container_name: frontend
+    working_dir: ${PWD}
+
+  back-end:
+    image: backend
+    build:
+      dockerfile: backend/Dockerfile
+    restart: always
+    networks:
+      - react-express
+      - express-mongo
+    container_name: backend
+    working_dir: ${PWD}
+
+  mongo-db:
+    image: mongo:latest
+    container_name: mongo
+    networks:
+      - express-mongo
+    volumes:
+      - ./data:/data/db
+
+volumes:
+  data:
+networks:
+  react-express:
+  express-mongo:
