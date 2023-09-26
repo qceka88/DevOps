@@ -1,0 +1,41 @@
+version: "3.0"
+
+services:
+
+  mysql_service:
+    image: mysql:8.0
+    container_name: mysql_db
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=resellerdb
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=userpass
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend
+    restart: on-failure
+
+  reseller_service:
+      image: resellerapp
+      build:
+        dockerfile: Dockerfile
+      container_name: reseller_app
+      ports:
+        - 8080:8080
+      depends_on:
+        - mysql_service
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/resellerdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        - SPRING_DATASOURCE_USERNAME=root
+        - SPRING_DATASOURCE_PASSWORD=my-secret-pw
+      networks:
+        - backend
+      restart: on-failure
+
+volumes:
+  db_data:
+networks:
+  backend:
