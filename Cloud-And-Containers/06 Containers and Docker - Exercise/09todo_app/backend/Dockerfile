@@ -15,7 +15,7 @@ RUN npm ci
 #FOR DOCKER COMPOSE
 COPY backend/ /usr/src/app
 #FOR TERMINAL COMMANDS
-COPY . /usr/src/app
+#COPY . /usr/src/app
 
 EXPOSE 3000
 
