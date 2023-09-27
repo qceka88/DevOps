@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+
+  vote:
+    image: my_vote_img
+    container_name: vote
+    build:
+      dockerfile: vote/Dockerfile
+    command: python vote/app.py
+    volumes:
+     - pg-data:/var/lib/postgresql/data
+    ports:
+      - 5000:80
+    networks:
+      - backend
+      - frontend
+    restart: on-failure
+
+  result:
+    image: my_result_img
+    container_name: result
+    build:
+      dockerfile:  result/Dockerfile
+    command: nodemon result/server.js
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - 5001:80
+    networks:
+      - backend
+      - frontend
+    restart: on-failure
+
+  worker:
+    image: my_worker_img
+    container_name: worker
+    build:
+      dockerfile: worker/Dockerfile
+    networks:
+      - backend
+    restart: on-failure
+
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      - backend
+    restart: on-failure
+
+  db:
+    image: postgres
+    container_name: psql_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - backend
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    restart: on-failure
+
+volumes:
+  pg-data:
+networks:
+  backend:
+  frontend:
