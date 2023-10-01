@@ -8,3 +8,4 @@ az acr repository show --name yankotaskboardappcr --repository taskboard_image_y
 docker context create aci yankotaskboardcontext
 docker context use yankotaskboardcontext
 docker compose up
+az group delete --name trackerappyanko
