@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    app:
+      container_name: app
+      image: yrposiocr.azurecr.io/yr_posio_image:v1
+      build:
+        dockerfile: Dockerfile
+      volumes:
+        - azure:/posio
+      environment:
+        - POSIO_SETTINGS=/app/config.py
+      ports:
+        - 5000:5000
+      restart: on-failure
+volumes:
+  azure:
+    driver: azure_file
+    driver_opts:
+      share_name: azure
+      storage_account_name: yrpossiostorage
