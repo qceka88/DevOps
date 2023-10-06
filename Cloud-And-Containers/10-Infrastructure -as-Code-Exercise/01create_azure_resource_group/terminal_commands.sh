@@ -2,5 +2,5 @@ az login
 terraform init
 terraform fmt | terraform validate
 terraform apply
-#to remove the resource
+#remove the resource group from Azure
 terraform destroy
