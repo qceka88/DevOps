@@ -1,7 +1,10 @@
+name: "Terraform Plan/Apply"
+
 on:
   push:
     branches:
       - "main"
+
 env:
   AMR_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
   AMR_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -9,6 +12,7 @@ env:
   AMR_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
 jobs:
+
   terraform-plan:
     name: "Terraform Plan"
     runs-on: ubuntu-latest
