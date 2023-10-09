@@ -1,0 +1,30 @@
+name: "Terraform Test"
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  terraform-test:
+    name: "Terraform Test"
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository to the GitHub Action Runner
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install the latest verssion of the Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      # Initialize a new or existing Terraform working directory
+      # Creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: az login -u ${{ secrets.AZ_USERNAME }} -p ${{ secrets.AZ_PASSWORD }} && terraform init
+      # Checks all Terraform configurations files adhere to a canonical format
+      - name: Terraform Format
+        run: terraform fmt
+      # Validate  Terraform Files
+      - name: Terraform Validate
+        run: terraform validate
+

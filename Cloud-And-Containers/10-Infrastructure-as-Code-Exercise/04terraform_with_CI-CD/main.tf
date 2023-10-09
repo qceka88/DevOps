@@ -6,10 +6,10 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name = "TaskBoardRG-48395"
+    resource_group_name  = "StorrageTaskBoard-48395"
     storage_account_name = "yrtaskboardstorage"
-    container_name = "yrtaskboardcontainer"
-    key = "terraform.tfstate"
+    container_name       = "yrtaskboardcontainer"
+    key                  = "terraform.tfstate"
   }
 }
 
@@ -17,22 +17,20 @@ provider "azurerm" {
   features {}
 }
 
-/* not used after separating on multiple files
-
 resource "random_integer" "ri" {
   max = 99999
   min = 10000
 }
-*/
+
 
 resource "azurerm_resource_group" "rg" {
   location = var.resource_group_location
-  name     = var.resource_group_name
+  name     = "${var.resource_group_name}-${random_integer.ri.result}"
 }
 
 resource "azurerm_service_plan" "as" {
   location            = azurerm_resource_group.rg.location
-  name                = var.app_service_plan_name
+  name                = "${var.app_service_plan_name}-${random_integer.ri.result}"
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "F1"
@@ -40,7 +38,7 @@ resource "azurerm_service_plan" "as" {
 
 
 resource "azurerm_mssql_server" "mssql_server" {
-  name                         = var.mssql_server_name
+  name                         = "${var.mssql_server_name}-${random_integer.ri.result}"
   resource_group_name          = azurerm_resource_group.rg.name
   location                     = azurerm_resource_group.rg.location
   version                      = "12.0"
@@ -49,7 +47,7 @@ resource "azurerm_mssql_server" "mssql_server" {
 }
 
 resource "azurerm_mssql_database" "mssql_database" {
-  name           = var.mssql_database_name
+  name           = "${var.mssql_database_name}-${random_integer.ri.result}"
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   license_type   = "LicenseIncluded"
   sku_name       = "S0"
@@ -58,7 +56,7 @@ resource "azurerm_mssql_database" "mssql_database" {
 }
 
 resource "azurerm_mssql_firewall_rule" "sql_firewall_rule" {
-  name             = var.firewall_rule_name
+  name             = "${var.firewall_rule_name}-${random_integer.ri.result}"
   start_ip_address = "0.0.0.0"
   end_ip_address   = "0.0.0.0"
   server_id        = azurerm_mssql_server.mssql_server.id
@@ -66,7 +64,7 @@ resource "azurerm_mssql_firewall_rule" "sql_firewall_rule" {
 
 resource "azurerm_linux_web_app" "lwa" {
   location            = azurerm_resource_group.rg.location
-  name                = var.app_service_name
+  name                = "${var.app_service_name}-${random_integer.ri.result}"
   resource_group_name = azurerm_resource_group.rg.name
   service_plan_id     = azurerm_service_plan.as.id
 
