@@ -22,6 +22,7 @@ services:
     container_name: web-app
     build:
       dockerfile:  Library/Dockerfile
+    domainname: 'qceka88'
     ports:
       - "80:80"
     restart: on-failure
