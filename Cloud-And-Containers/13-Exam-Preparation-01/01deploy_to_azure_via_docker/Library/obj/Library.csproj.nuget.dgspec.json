@@ -1,0 +1,196 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library\\Library.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library.Data\\Library.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library.Data\\Library.Data.csproj",
+        "projectName": "Library.Data",
+        "projectPath": "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library.Data\\Library.Data.csproj",
+        "packagesPath": "C:\\Users\\EvilDevil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\EvilDevil\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\EvilDevil\\.dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library\\Library.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library\\Library.csproj",
+        "projectName": "Library",
+        "projectPath": "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library\\Library.csproj",
+        "packagesPath": "C:\\Users\\EvilDevil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\EvilDevil\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Users\\EvilDevil\\.dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library.Data\\Library.Data.csproj": {
+                "projectPath": "C:\\Users\\EvilDevil\\PycharmProjects\\HelloSoftUni\\venv\\10 Python Cloud And Containers\\13 Exam Preparation - 01\\01deploy_to_azure_via_docker\\Library.Data\\Library.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Users\\EvilDevil\\.dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
