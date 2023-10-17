@@ -1,0 +1,38 @@
+
+version: "3.8"
+
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    deploy:
+      resources:
+        reservations:
+          cpus: "2"
+          memory: 2GB
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=yourStrongPassword12#
+    volumes:
+      - sqldata:/var/opt/mssql
+
+  web-app:
+    image: qceka88homiesdockercr.azurecr.io/homies_docker_qceka88:v1
+    container_name: web-app
+    domainname: "qceka88-docker"
+    build:
+      dockerfile: Homies/Dockerfile
+    ports:
+      - "80:80"
+    restart: on-failure
+
+volumes:
+  sqldata:
+    driver: azure_file
+    driver_opts:
+      share_name: sql-volume
+      storage_account_name: homiesstorageqceka88
