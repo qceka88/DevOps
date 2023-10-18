@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - alert-rules-library.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - localhost:9093
+
+scrape_configs:
+  - job_name: "library"
+    metrics_path: /probe
+    static_configs:
+      - targets:
+          - http://qceka88.westeurope.azurecontainer.io
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
