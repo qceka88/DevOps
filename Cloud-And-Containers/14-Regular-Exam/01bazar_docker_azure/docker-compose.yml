@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  bazar-sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    container_name: bazar-sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=qwertY@12345
+    deploy:
+      resources:
+        reservations:
+          cpus: "2"
+          memory: 2GB
+    volumes:
+     - sqldata:/var/opt/mssql/server
+
+
+  web-app:
+    image: qceka88bazarcr.azurecr.io/bazar_qceka88:v1
+    container_name: web-app
+    build:
+      dockerfile: SoftUniBazar/Dockerfile
+    domainname: "qceka88-docker"
+    ports:
+      - "80:80"
+    restart: on-failure
+
+volumes:
+  sqldata:
+    driver: azure_file
+    driver_opts:
+      share_name: sql-volume
+      storage_account_name: qceka88bazarsa
