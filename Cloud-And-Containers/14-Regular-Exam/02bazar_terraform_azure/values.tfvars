@@ -1,0 +1,11 @@
+/* Values for "hidden" variables. This file should be hidden from other users */
+resource_group_name     = "qceka88TerraformBazarRG"
+resource_group_location = "West Europe"
+app_service_plan_name   = "qceka88-bazar-plan"
+app_service_name        = "qceka88-terraform"
+mssql_server_name       = "qceka88-bazar-server"
+mssql_database_name     = "qceka88-bazar-db"
+mssql_admin_username    = "adminusername"
+mssql_admin_password    = "S1R0nGPassw@rd"
+firewall_rule_name      = "qceka88-bazar-firewall"
+github_repo_url         = "https://github.com/qceka88/SoftUniBazar.git"
