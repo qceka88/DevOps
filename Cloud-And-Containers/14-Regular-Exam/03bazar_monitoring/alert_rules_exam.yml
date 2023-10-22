@@ -1,0 +1,22 @@
+
+groups:
+
+  - name: SoftUniBazar page access 3 times for 5 minutes
+    rules:
+      - alert: SoftUniBazarAccessed3TimesFor5Minutes
+        expr: changes(http_request_duration_seconds_count[5m]) >= 3
+        for: 10s
+        labels:
+          severity: warning
+        annotations:
+          summary: "SoftUniBazar was accessed for more than 3 times whithin the last 5 minutes."
+
+  - name: Connection was slow for SoftUniBazar
+    rules:
+      - alert: SlowConnectionBazar
+        expr: probe_http_duration_seconds{phase="connect"} > 0.0001
+        for: 3s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Connection took more than 0.1 millseconds for SoftUniBazar"
