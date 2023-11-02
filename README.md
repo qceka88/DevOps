@@ -14,7 +14,6 @@ Contains:
 This is a part from my education in [SoftUni](https://softuni.bg/).
 
 <img alt='Image' width="300px" src="https://softuni.bg/Content/images/open-graph/university-default-og.png"/>
-![alt|300](https://softuni.bg/Content/images/open-graph/university-default-og.png)
 
 Result of Cloud and Containers course.
 ![img_1.jpeg](img_1.jpeg)
