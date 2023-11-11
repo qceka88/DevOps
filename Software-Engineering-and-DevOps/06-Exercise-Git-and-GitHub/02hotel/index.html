@@ -9,31 +9,150 @@
 </head>
 
 <body>
-    <section id="welcome">
-        <h1>&#9734; Welcome to our family hotel &#9734;</h1>
-        <div class="home-container">
-            <div class="info">
-                <h1>Hotel reservation</h1>
-            </div>
-        </div>
-    </section>
-
-    <div class="site-content">   
-        <!-- Site Content -->
-
-        <!-- Thank you, page! -->
-        <div class="thank-you-content custom-form">
-            <div class="background">
-                <div class="shape"></div>
-                <div class="shape"></div>
-            </div>
-            <form class="thank-you">
-                <h3>Thank you for your reservation!</h3>
-                <button id="new-reservation">Make new reservation</button>
-            </form>
+<section id="welcome">
+    <h1>&#9734; Welcome to our family hotel &#9734;</h1>
+    <div class="home-container">
+        <div class="info">
+            <h1>Hotel reservation</h1>
         </div>
     </div>
-    <script src="solution.js"></script>
+</section>
+
+<div class="site-content">
+    <!-- Site Content -->
+
+
+    <!-- Search Form Start  -->
+    <div class="search-form-content custom-form">
+
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <form>
+
+            <h3>Search Here</h3>
+
+            <label for="check-in">Check-in:</label>
+            <input type="date" id="check-in" name="check-in">
+
+            <label for="check-out">Check-out:</label>
+            <input type="date" id="check-out" name="check-out">
+
+            <label for="people">Numbers of people:</label>
+            <input type="number" min="1" id="people" name="phone-number">
+
+            <button id="search-form-button">Next</button>
+        </form>
+    </div>
+    <!-- Search Form End  -->
+
+
+
+    <!-- Guest Form Start -->
+    <div class="guest-details-form-content custom-form hidden">
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <form>
+
+            <h3>Personal Information</h3>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+
+            <label for="phone-number">Phone Number:</label>
+            <input type="number" id="phone-number" name="phone-number">
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+
+            <div class="buttons">
+                <button id="guest-details-back-btn">Back</button>
+                <button id="guest-details-next-btn">Next</button>
+            </div>
+        </form>
+    </div>
+    <!-- Guest Form End -->
+
+    <!-- Offer Form Start -->
+    <div class="search-result-form-content custom-form hidden">
+
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <form>
+            <h3>Our Offers</h3>
+            <section class="offers">
+                <article class="offer-card room-type selected-room">
+                    <img src="static/img/budgetRoom.jpg" alt="budget room">
+                    <h4>Budget Room – 120 USD</h4>
+                </article>
+                <article class="offer-card room-type">
+                    <img src="static/img/familyRoom.jpg" alt="family room">
+                    <h4>Family Room – 250 USD</h4>
+                </article>
+                <article class="offer-card room-type">
+                    <img src="static/img/kingRoom.jpg" alt="king room">
+                    <h4>King Room – 500 USD</h4>
+                </article>
+            </section>
+            <div class="buttons">
+                <button id="search-back-btn">Back</button>
+                <button id="search-next-btn">Next</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- Offer Form End -->
+
+    <!-- Confirm Reservation Form Start -->
+    <div class="confirm-reservation-content custom-form hidden">
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <form>
+            <h3>Confirm Reservation</h3>
+            <article class="confirm-reservation">
+                <h4 id="guest-name">Name: Demo-User</h4>
+                <br/>
+                <h4 id="guest-phone">Phone Number: 09939393939</h4>
+                <br/>
+                <h4 id="guest-email">Email: demo@gmail.com</h4>
+                <br/>
+                <h4 id="guest-room-type">Room Type: Family Room</h4>
+                <br/>
+                <h4 id="guest-data-in">Date-in: 26-11-29</h4>
+                <br/>
+                <h4 id="guest-data-out">Date-out: 28-11-29</h4>
+            </article>
+            <div class="buttons">
+                <button id="confirm-back-btn">Back</button>
+                <button id="confirm-reservation">Confirm</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- Confirm Reservation Form End -->
+
+    <!-- Thank you, page! -->
+    <div class="thank-you-content custom-form">
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <form class="thank-you">
+            <h3>Thank you for your reservation!</h3>
+            <button id="new-reservation">Make new reservation</button>
+        </form>
+    </div>
+    <!-- Thank you, page! END -->
+</div>
+
+<script src="solution.js"></script>
 </body>
 
 </html>
