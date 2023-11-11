@@ -4,4 +4,6 @@ This is a playground for the lab from the Git Branching and Pull Requests lesson
 ## Make your changes here
 
 ### ADDED CHANGES
-### ADDED CHANGES
+### ADDED CHANGES Change from the Local
+
+# MODIFICATION FROM LOCAL COMPUTER
