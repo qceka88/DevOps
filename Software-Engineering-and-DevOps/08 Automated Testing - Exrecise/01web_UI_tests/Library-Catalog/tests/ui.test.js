@@ -355,8 +355,24 @@ test('Login and verify if no books are displayed.', async ({page}) => {
 
     }
 );
+test('Guest user can see details of book.', async ({page}) => {
+        await page.goto(pageURL + 'catalog');
 
-test('Login and navigate to Details page.', async ({page}) => {
+        await Promise.all([
+            page.waitForURL(pageURL + 'catalog'),
+        ]);
+
+        await page.click('a[href="/catalog"]');
+        await page.waitForSelector('.otherBooks');
+        await page.click('.otherBooks a.button');
+        await page.waitForSelector('.book-information');
+
+        const detailsPageTitle = await page.textContent('.book-information h3');
+        expect(detailsPageTitle).toBe('Test Book');
+
+    }
+);
+test('Login and navigate to Details page check Title is correct.', async ({page}) => {
         await page.goto(pageURL + 'login');
         await page.fill('input[name="email"]', 'peter@abv.bg');
         await page.fill('input[name="password"]', '123456');
@@ -377,23 +393,6 @@ test('Login and navigate to Details page.', async ({page}) => {
     }
 );
 
-test('Guest user can see details of book.', async ({page}) => {
-        await page.goto(pageURL + 'catalog');
-
-        await Promise.all([
-            page.waitForURL(pageURL + 'catalog'),
-        ]);
-
-        await page.click('a[href="/catalog"]');
-        await page.waitForSelector('.otherBooks');
-        await page.click('.otherBooks a.button');
-        await page.waitForSelector('.book-information');
-
-        const detailsPageTitle = await page.textContent('.book-information h3');
-        expect(detailsPageTitle).toBe('Test Book');
-
-    }
-);
 
 test('Book type is correct.', async ({page}) => {
         await page.goto(pageURL + 'catalog');
@@ -443,15 +442,16 @@ test('Book Edit Button is visible for creator.', async ({page}) => {
         await page.click('a[href="/catalog"]');
         await page.waitForSelector('.otherBooks');
         await page.click('.otherBooks a.button');
-        await page.waitForSelector('.book-information div');
+        const buttonSelector = '.book-information div a.button[href^="/edit/"]'
+        await page.waitForSelector(buttonSelector);
 
-        const editButton = await page.$('a[href="/edit/c8c32027-4a83-4deb-8bf5-55a1a22a51a2"]');
+        const editButton = await page.$(buttonSelector);
         const isEditButtonVisible = await editButton.isVisible();
         expect(isEditButtonVisible).toBe(true);
     }
 );
 
-test.only('Book Delete Button is visible for creator.', async ({page}) => {
+test('Book Delete Button is visible for creator.', async ({page}) => {
         await page.goto(pageURL + 'login');
         await page.fill('input[name="email"]', 'peter@abv.bg');
         await page.fill('input[name="password"]', '123456');
@@ -464,17 +464,104 @@ test.only('Book Delete Button is visible for creator.', async ({page}) => {
         await page.click('a[href="/catalog"]');
         await page.waitForSelector('.otherBooks');
         await page.click('.otherBooks a.button');
-        await page.waitForSelector('.book-information div');
+        const buttonSelector = '.actions a.button:has-text("Delete")'
+        await page.waitForSelector(buttonSelector);
 
-        const editButton = await page.$('a[href="javascript:void(0)"]');
-        const isEditButtonVisible = await editButton.isVisible();
+        const deleteButton = await page.$(buttonSelector);
+        const isDeleteButtonVisible = await deleteButton.isVisible();
+        expect(isDeleteButtonVisible).toBe(true);
+    }
+);
+
+test('Book Edit Button is NOT visible for non-creator.', async ({page}) => {
+        await page.goto(pageURL + 'login');
+        await page.fill('input[name="email"]', 'john@abv.bg');
+        await page.fill('input[name="password"]', '123456');
+
+        await Promise.all([
+            page.click('input[type="submit"]'),
+            page.waitForURL(pageURL + 'catalog'),
+        ]);
+
+        await page.click('a[href="/catalog"]');
+        await page.waitForSelector('.otherBooks');
+        await page.click('.otherBooks a.button');
+        const buttonSelector = '.book-information div'
+        await page.waitForSelector(buttonSelector);
+
+        const editButton = await page.$(buttonSelector + ' a.button[href^="/edit/"]');
+        const isEditButtonVisible = await editButton === null;
         expect(isEditButtonVisible).toBe(true);
+    }
+);
+
+test('Book Delete Button is Not visible for non-creator.', async ({page}) => {
+        await page.goto(pageURL + 'login');
+        await page.fill('input[name="email"]', 'john@abv.bg');
+        await page.fill('input[name="password"]', '123456');
+
+        await Promise.all([
+            page.click('input[type="submit"]'),
+            page.waitForURL(pageURL + 'catalog'),
+        ]);
+
+        await page.click('a[href="/catalog"]');
+        await page.waitForSelector('.otherBooks');
+        await page.click('.otherBooks a.button');
+        const buttonSelector = '.book-information div'
+        await page.waitForSelector(buttonSelector);
+
+        const deleteButton = await page.$('a.button:has-text("Delete")');
+        const isDeleteButtonVisible = await deleteButton === null;
+        expect(isDeleteButtonVisible).toBe(true);
+    }
+);
+
+test('Book Like Button is NOT visible for creator.', async ({page}) => {
+        await page.goto(pageURL + 'login');
+        await page.fill('input[name="email"]', 'peter@abv.bg');
+        await page.fill('input[name="password"]', '123456');
+
+        await Promise.all([
+            page.click('input[type="submit"]'),
+            page.waitForURL(pageURL + 'catalog'),
+        ]);
+
+        await page.click('a[href="/catalog"]');
+        await page.waitForSelector('.otherBooks');
+        await page.click('.otherBooks a.button');
+        await page.waitForSelector('.book-information div div');
+
+        const likeButton = await page.$('a.button:has-text("Like")');
+        const isLikeButtonVisible = await likeButton == null;
+        expect(isLikeButtonVisible).toBe(true);
+    }
+);
+
+test('Book Like Button is visible for NON-creator.', async ({page}) => {
+        await page.goto(pageURL + 'login');
+        await page.fill('input[name="email"]', 'john@abv.bg');
+        await page.fill('input[name="password"]', '123456');
+
+        await Promise.all([
+            page.click('input[type="submit"]'),
+            page.waitForURL(pageURL + 'catalog'),
+        ]);
+
+        await page.click('a[href="/catalog"]');
+        await page.waitForSelector('.otherBooks');
+        await page.click('.otherBooks a.button');
+        await page.waitForSelector('.book-information div div');
+
+        const likeButton = await page.$('a.button:has-text("Like")');
+        const isLikeButtonVisible = await likeButton.isVisible();
+        expect(isLikeButtonVisible).toBe(true);
     }
 );
 
 test('Verify redirection of logout link after user login.', async ({page}) => {
         await page.goto(pageURL + 'login');
-        await page.fill('input[name="email"]', 'peter@abv.bg');
+        await page.fill('input[name="email"]', 'john@abv.bg');
         await page.fill('input[name="password"]', '123456');
         await page.click('input[type="submit"]');
 
