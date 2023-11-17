@@ -91,13 +91,15 @@ test('Login with valid credentials.', async ({page}) => {
 
 test('Login with empty input fields.', async ({page}) => {
         await page.goto(pageURL + 'login');
-        await page.click('input[type="submit"]');
+
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/login"]');
         expect(page.url()).toBe(pageURL + 'login');
     }
@@ -105,13 +107,15 @@ test('Login with empty input fields.', async ({page}) => {
 test('Login with empty email field.', async ({page}) => {
         await page.goto(pageURL + 'login');
         await page.fill('input[name="password"]', '123456');
-        await page.click('input[type="submit"]');
+
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/login"]');
         expect(page.url()).toBe(pageURL + 'login');
     }
@@ -120,13 +124,14 @@ test('Login with empty email field.', async ({page}) => {
 test('Login with empty password field.', async ({page}) => {
         await page.goto(pageURL + 'login');
         await page.fill('input[name="email"]', 'peter@abv.bg');
-        await page.click('input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/login"]');
         expect(page.url()).toBe(pageURL + 'login');
     }
@@ -146,13 +151,14 @@ test('Register with valid credentials.', async ({page}) => {
 
 test('Try to register with empty input fields.', async ({page}) => {
         await page.goto(pageURL + 'register');
-        await page.click('input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/register"]');
         expect(page.url()).toBe(pageURL + 'register');
     }
@@ -162,13 +168,14 @@ test('Try to register with empty email field.', async ({page}) => {
         await page.goto(pageURL + 'register');
         await page.fill('input[name="password"]', '123456');
         await page.fill('input[name="confirm-pass"]', '123456');
-        await page.click('input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/register"]');
         expect(page.url()).toBe(pageURL + 'register');
     }
@@ -178,13 +185,14 @@ test('Try to register with empty password field.', async ({page}) => {
         await page.goto(pageURL + 'register');
         await page.fill('input[name="email"]', 'peter1@abv.bg');
         await page.fill('input[name="confirm-pass"]', '123456');
-        await page.click('input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/register"]');
         expect(page.url()).toBe(pageURL + 'register');
     }
@@ -194,13 +202,14 @@ test('Try to register with empty confirm password field.', async ({page}) => {
         await page.goto(pageURL + 'register');
         await page.fill('input[name="email"]', 'peter1@abv.bg');
         await page.fill('input[name="password"]', '123456');
-        await page.click('input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/register"]');
         expect(page.url()).toBe(pageURL + 'register');
     }
@@ -211,13 +220,14 @@ test('Try to register with different password fields.', async ({page}) => {
         await page.fill('input[name="email"]', 'test125@abv.bg');
         await page.fill('input[name="password"]', '123456');
         await page.fill('input[name="confirm-pass"]', '123457');
-        await page.click('input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('Passwords don\'t match!');
             await dialog.accept();
         });
+        await page.click('input[type="submit"]');
+
         await page.$('a[href="/register"]');
         expect(page.url()).toBe(pageURL + 'register');
     }
@@ -256,15 +266,20 @@ test('Add book with empty title field', async ({page}) => {
         await page.click('a[href="/create"]');
         await page.waitForSelector('#create-form')
         await page.fill('#description', 'This is a test book description');
-        await page.fill('#image', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/1200px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg')
+        await page.fill(
+            '#image',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg' +
+            '_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/' +
+            '1200px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg')
         await page.selectOption('#type', 'Fiction');
-        await page.click('#create-form input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('#create-form input[type="submit"]');
+
         await page.$('a[href="/create"]')
         expect(page.url()).toBe(pageURL + 'create');
     }
@@ -282,15 +297,19 @@ test('Add book with empty description field', async ({page}) => {
         await page.click('a[href="/create"]');
         await page.waitForSelector('#create-form')
         await page.fill('#title', 'This is a test Title');
-        await page.fill('#image', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/1200px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg')
+        await page.fill('#image', 'https://upload.wikimedia.org/' +
+            'wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%' +
+            '2C_New_York_Public_Library%2C_2009._Pic_01.jpg/1200px-Gutenberg' +
+            '_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg')
         await page.selectOption('#type', 'Fiction');
-        await page.click('#create-form input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('#create-form input[type="submit"]');
+
         await page.$('a[href="/create"]')
         expect(page.url()).toBe(pageURL + 'create');
     }
@@ -310,13 +329,14 @@ test('Add book with empty image field', async ({page}) => {
         await page.fill('#title', 'This is a test Title');
         await page.fill('#description', 'This is a test book description');
         await page.selectOption('#type', 'Fiction');
-        await page.click('#create-form input[type="submit"]');
 
         page.on('dialog', async dialog => {
             expect(dialog.type()).toContain('alert');
             expect(dialog.message()).toContain('All fields are required!');
             await dialog.accept();
         });
+        await page.click('#create-form input[type="submit"]');
+
         await page.$('a[href="/create"]')
         expect(page.url()).toBe(pageURL + 'create');
     }
