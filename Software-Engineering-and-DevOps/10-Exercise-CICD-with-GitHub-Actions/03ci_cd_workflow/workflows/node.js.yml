@@ -1,0 +1,57 @@
+name: CI/CD workflow "Library-Catalogue" - app
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18.x, ]
+
+    steps:
+      - name: Checkout program code
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install npm pack & Dependencies
+        run: npm install
+      - name: Install pack
+        run: npm install --save-dev mocha
+      - name: Install Playwright globally
+        run: npm install -g playwright
+      - name: Install Playwright browsers
+        run: npx playwright install
+      - name: Install http-server globally
+        run: npm install -g http-server
+      - name: Check and Modify File Permissions
+        run: |
+          ls -l node_modules/.bin/playwright
+          chmod +x node_modules/.bin/playwright
+      - name: Start the application
+        run: npx http-server -a localhost -p 3000 -P http://localhost:3000? -c-1 &
+      - name: Start Node.Server
+        run: node server/server.js -c-1 &
+      - name: Wait for the application to start
+        run: sleep 10
+      - name: Test program code with unit tests
+        run: node_modules/.bin/playwright test tests/ui.test.js
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_TOKEN }}
+    needs: build
