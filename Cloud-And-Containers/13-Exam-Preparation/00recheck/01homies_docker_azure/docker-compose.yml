@@ -25,7 +25,7 @@ services:
     container_name: web-app
     domainname: "qceka88-docker"
     build:
-      dockerfile: Homies/Dockerfile
+      dockerfile: Homies/DockerfileJenkins
     ports:
       - "80:80"
     restart: on-failure

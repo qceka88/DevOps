@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+
+  jenkins:
+    build:
+      dockerfile: DockerfileJenkins
+    image: my-jenkins-image-yanko
+    container_name: "Jenkins-Service"
+    ports:
+      - "8080:8080"
+      - "50000:5000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: on-failure
+
+  ngrok:
+    image: ngrok/ngrok
+    container_name: 'NGROK-Service'
+    stdin_open: true
+    tty: true
+    environment:
+      - NGROK_AUTHTOKEN=2YzNG63qkIM0fESPsVDo8p3gqBV_2dYNhvUvWGw7HcoUrvRQj
+    command: http host.docker.internal:8080
+
+volumes:
+  jenkins_home:
+
+
