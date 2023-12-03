@@ -4,7 +4,7 @@ services:
 
   jenkins:
     build:
-      dockerfile: DockerfileJenkins
+      dockerfile: Dockerfile
     image: my-jenkins-image-yanko
     container_name: "Jenkins-Service"
     ports:
