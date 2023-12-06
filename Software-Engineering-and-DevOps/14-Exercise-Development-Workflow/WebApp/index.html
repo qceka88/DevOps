@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 
-  <title>Scary Stories</title>
+  <title>Scary Stories 2.0</title>
 </head>
 
 <body class="body">
@@ -21,7 +21,7 @@
         <span>Fill the author information, genre and the story text!</span>
       </h1>
       <form>
-        <div class="section">
+        <div class="section"><span>&#9753;</span>
           Author Information</div>
         <div class="inner-wrap">
           <label>First Name: <input type="text" id="first-name" name="field1" /></label>
@@ -31,9 +31,18 @@
           <label>Story Title:
             <input type="text" id="story-title" name="field5" />
           </label>
+           <label>Genre:
+            <select name="field4" id="genre">
+              <option value="Disturbing">Distrurbing</option>
+              <option value="Psyhological">Psyhological</option>
+              <option value="Killer">Killer</option>
+              <option value="Monsters">Monsters</option>
+              <option value="Paranormal">Paranormal</option></select>
+          </label>
+
         </div>
 
-        <div class="section">
+        <div class="section"><span>&#9753;</span>
           Story</div>
         <div class="inner-wrap">
           <label for="story">Your Story:</label>
