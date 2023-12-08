@@ -1,0 +1,56 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code for app.
+        uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+      - name: Install dependencies.
+        run: npm install
+      - name: Run Unit Testing for app.
+        run: npm run test:unit
+      - name: Display my SoftUni username.
+        run: echo "qceka88"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy App to production.
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+    needs: build-test
+
+
+  run-ui-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code for app.
+        uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+      - name: Install dependencies.
+        run: npm install
+      - name: Install playwright module.
+        run: npx playwright install
+      - name: Run User Interface tests.
+        run: npm run test:ui
+    needs: deploy
+    
