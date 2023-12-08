@@ -1,0 +1,8 @@
+include header.pug
+
+h1 Added Boardgames
+ul
+  each m in boardgames
+    li #{m.name} (#{m.rating})
+
+include footer.pug

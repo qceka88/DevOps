@@ -1,0 +1,13 @@
+include header.pug
+
+h1 Add New Boardgame
+form(method='POST' action='/add-boardgame')
+  div
+    label(for='name') Name: 
+    input#name(type='text', name='name')
+  div
+    label(for='rating') Rating: 
+    input#rating(type='text',  name='rating')
+  button(type='submit') Add
+
+include footer
