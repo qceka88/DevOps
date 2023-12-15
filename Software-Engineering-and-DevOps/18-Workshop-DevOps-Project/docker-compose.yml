@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+
+  frontend:
+    image: qceka88/frontend:latest
+    container_name: frontend
+    build:
+      dockerfile: frontend/Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - react-express
+    restart: on-failure
+
+  backend:
+    image: qceka88/backend:latest
+    container_name: backedn
+    build:
+      dockerfile: backend/Dockerfile
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - react-express
+      - express-mongo
+    restart: on-failure
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    volumes:
+      - ./data:/data/db
+    networks:
+      - express-mongo
+
+volumes:
+  data:
+
+networks:
+  express-mongo:
+    name: express-mongo
+  react-express:
+    name: react-express
