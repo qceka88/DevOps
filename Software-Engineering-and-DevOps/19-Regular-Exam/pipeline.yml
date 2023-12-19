@@ -1,0 +1,60 @@
+name: Regular Exam CI/CD workflow.
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  #  Build and test our WebApp in GitHub actions workflow.
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code in GitHub Repo
+        uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "npm"
+      - name: Build & install dependencies
+        run: npm install
+      - name: Run Unit tests to WebApp
+        run: npm run test:unit
+      - name: Display my SoftUni username
+        run: echo "qceka88"
+
+  #  Deploy our WebApp in Render.com using GitHub secrets & Render Api Token
+  #  to authenticate and trigger deploy process.
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Deploy to production in Render.com
+          uses: johnbeynon/render-deploy-action@v0.0.8
+          with:
+            service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+            api-key: ${{ secrets.MY_RENDER_API_KEY }}
+    needs: build-test
+
+  #  Wait our WebApp for complete deploy in Render.com
+  #  and run User Interface tests.
+  run-ui-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait deploy for 120 seconds
+        run: sleep 120
+      - name: Checkout code in GitHub Repo
+        uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "npm"
+      - name: Build & install dependencies
+        run: npm install
+      - name: Install playwright module
+        run: npx playwright install
+      - name: Run UI tests to WebApp
+        run: npm run test:ui
+    needs: deploy
