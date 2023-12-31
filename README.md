@@ -17,3 +17,6 @@ This is a part from my education in [SoftUni](https://softuni.bg/).
 
 Result of Cloud and Containers course.
 ![img_1.jpeg](img_1.jpeg)
+
+Software Engineering and DevOps course.
+![img_2.jpeg](img_2.jpeg)
